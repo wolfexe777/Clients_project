@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'clients/base.html' %}
+
+{% block content %}
+  <h1 style="text-align:center">Результаты поиска</h1>
+<div id="client-results-container">
+  {% if clients %}
+    <ul>
+      {% for client in clients %}
+        <li>
+          <a href="{% url 'clients:client_detail' client.pk %}">{{ client }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+  <br>
+    <h4 style="margin-left: 20px;"> По Вашему запросу ничего не найдено !</h4>
+  <br>
+  <br>
+  {% endif %}
+<button id="my-button"  type="button" onclick="window.history.back()">Назад к поиску</button>
+</div>
+  {% endblock %}

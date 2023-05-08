@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'clients/base.html' %}
+
+{% block content %}
+
+  <h1 style="text-align:center">Поиск клиента</h1>
+<div id="client-search-container">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Найти</button>
+
+  </form>
+  {% if clients %}
+    <h2>Результат поиска</h2>
+    <ul>
+    {% for client in clients %}
+      <li><a href="{% url 'clients:client_detail' pk=client.pk %}">{{ client }}</a></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

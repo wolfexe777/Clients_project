@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'clients/base.html' %}
+{% block content %}
+  <h2 style="text-align:center">Удаление клиента</h2>
+<div id="client-delete-container">
+  <h4>Вы действительно хотите удалить клиента {{ client.first_name }} {{ client.last_name }}?</h4>
+
+  <form method="post">
+    {% csrf_token %}
+    <br>
+    <button type="submit" name="confirm">Delete</button>
+    <br>
+    <button type="submit" name="cancel">Cancel</button>
+  </form>
+<script>
+  $(document).ready(function() {
+    // Show the modal when the delete button is clicked
+    $('.btn-danger').click(function() {
+      $('#confirmDeleteModal').modal('show');
+    });
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</div>
+{% endblock %}

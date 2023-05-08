@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'clients/base.html' %}
+
+{% block content %}
+{% load static %}
+  <h1 style="text-align:center">Подробная информация о клиенте</h1>
+<div id="client-detail-container">
+  <ul>
+    {% if client.photo %}
+    <img class="client-photo" src="{{ client.photo.url }}" alt="Photo">
+    {% else %}
+    <img class="client-photo" src="{% static 'clients/css/no-photo.jpg' %}" alt="Фото заглушка">
+    {% endif %}
+    <br>
+
+    <pre>
+    <li><strong>Имя:</strong> {{ client.first_name }}</li>
+    <li><strong>Отчество:</strong> {{ client.middle_name }}</li>
+    <li><strong>Фамилия:</strong> {{ client.last_name }}</li>
+    <li><strong>Дата рождения:</strong> {{ client.date_of_birth }}</li>
+    <li><strong>Номер телефона:</strong> {{ client.phone_number }}</li>
+    <li><strong>Email:</strong> {{ client.email }}</li>
+    <li><strong>Адрес места жительства:</strong> {{ client.address }}</li>
+    <li><strong>Образование:</strong> {{ client.education }}</li>
+    <li><strong>Место работы:</strong> {{ client.workplace }}</li>
+    <li><strong>Должность:</strong> {{ client.position }}</li>
+    <li><strong>Семейное положение, дети:</strong> {{ client.children }}</li>
+    <li><strong>Жизненные события клиента:</strong> {{ client.life_events }}</li>
+    <li><strong>Заболевания, жалобы клиента:</strong> {{ client.illnesses }}</li>
+    <li><strong>Диагноз:</strong> {{ client.diagnosis }}</li>
+    <li><strong>Дата последней консультации:</strong> {{ client.last_consultation_date }}</li>
+    </pre>
+  </ul>
+  <button style="margin-left:250px; margin-top:20px" onclick="location.href='{% url 'clients:client_edit' pk=client.pk %}'">Изменить</button>
+  <br>
+  <br>
+  <button style="margin-left:260px"  type="button" onclick="window.history.back()">Назад</button>
+</div>
+
+
+{% endblock %}
